@@ -28,16 +28,21 @@ var intervalID;
 
 function start() {
 	$(".start").remove()
-	$("<h1 class='timeRemaining'>Time Remaining: <span id='timeRemaining'>30</span> seconds</h1>").insertAfter($(".main-header"));
-	$("<h1 class='question'></h1>").insertAfter($(".timeRemaining"));
-	$("<div class='choices'></div>").insertAfter($(".question"));
-	setTimer();
+	$("<div class='live-box'></div>").insertAfter($(".main-header"));
+	$(".live-box").append($("<h1 class='timeRemaining'>Time Remaining: <span id='timeRemaining'>30</span> seconds</h1>"));
+	$(".live-box").append($("<h1 class='question'></h1>"));
+	$(".live-box").append($("<div class='choices'></div>"));
+	
+	thirtySecTimer();
 	nextQuestion();
 }
 
-function setTimer() {
-	
+function thirtySecTimer() {
+
+		timeRemaining = 30;
+		$("#timeRemaining").text(timeRemaining);
 		intervalID = setInterval(function(){ 
+		
 		if(timeRemaining > 0) {	
 			timeRemaining--;
 			$("#timeRemaining").text(timeRemaining);
@@ -47,7 +52,7 @@ function setTimer() {
 			// alert("Time's Up!");
 			unanswered++;
 			clearInterval(intervalID);
-			setTimer();
+			thirtySecTimer();
 			nextQuestion();
 		}
 		}, 1000);
@@ -55,25 +60,26 @@ function setTimer() {
 }
 
 function nextQuestion() {
+	
 	$(".choices").empty();
+	$(".question").text(questions[questionCounter]);
+
 	 // If all questions have been answered
 	if(questionCounter === arrayLength) {
 		calculateResults();
 	}
-
-	timeRemaining = 30;
-	$("#timeRemaining").text(timeRemaining);
-	$(".question").text(questions[questionCounter]);
-	// $(".choices").append(choices[questionCounter]);
-
+	
 	for (var i = 0; i < 4; i++) {
+		
 		console.log(questionCounter);
-	$(".choices").append("<div class='answerChoice'>" + choices[questionCounter][i] + "</div>" + "<br>") - 1;
+		$(".choices").append("<div class='answerChoice'>" + choices[questionCounter][i] + "</div>" + "<br>") - 1;
+	
 	}
 	questionCounter++;
 }
 
 function gradeQuestion() {
+
 	userGuess = $(this).text();
 	
 	if(userGuess === answers[questionCounter - 1]){
@@ -87,14 +93,20 @@ function gradeQuestion() {
 
 function calculateResults(){
 	clearInterval(intervalID);
-	$(".timeRemaining").remove();
-	$(".question").remove();
+	$(".live-box").empty();
 
-	$("<h1 class='finished'>All done, here's how you did!</h1>").insertAfter($(".main-header"));
-	$("<h3 class='correct'>Correct: <span id='correct'>0</span></h3><br>").insertAfter($(".finished"));
-	$("<h3 class='incorrect'>Incorrect: <span id='incorrect'>0</span></h3><br>").insertAfter($(".correct"));
-	$("<h3 class='unanswered'>Unanswered: <span id='unanswered'>0</span></h3>").insertAfter($(".incorrect"));
-	$("<button id='playAgain'>Play again?</button>").insertAfter($(".unanswered"));
+	$(".live-box").append($("<h1 class='finished'>All done, here's how you did!</h1>"));
+	$(".live-box").append($("<h3 class='correct'>Correct: <span id='correct'>0</span></h3>"));
+	$(".live-box").append($("<h3 class='incorrect'>Incorrect: <span id='incorrect'>0</span></h3>"));
+	$(".live-box").append($("<h3 class='unanswered'>Unanswered: <span id='unanswered'>0</span></h3>"));
+	$(".live-box").append($("<button id='playAgain'>Play again?</button>"));
+
+
+	// $("<h1 class='finished'>All done, here's how you did!</h1>").insertAfter($(".main-header"));
+	// $("<h3 class='correct'>Correct: <span id='correct'>0</span></h3>").insertAfter($(".finished"));
+	// $("<h3 class='incorrect'>Incorrect: <span id='incorrect'>0</span></h3><br>").insertAfter($(".correct"));
+	// $("<h3 class='unanswered'>Unanswered: <span id='unanswered'>0</span></h3>").insertAfter($(".incorrect"));
+	// $("<button id='playAgain'>Play again?</button>").insertAfter($(".unanswered"));
 
 	$("#correct").text(correct);
 	$("#incorrect").text(incorrect);
@@ -103,22 +115,18 @@ function calculateResults(){
 
 function reset() {
 	questionCounter = 0;
+	alert("reset");
 	correct = 0;
 	incorrect = 0;
 	unanswered = 0;
 
-	$(".finished").remove();
-	$(".correct").remove();
-	$(".incorrect").remove();
-	$(".unanswered").remove();
-	$("#playAgain").remove();
-	$(".choices").remove();
+	$(".live-box").empty();
 
 	$("<h1 class='timeRemaining'>Time Remaining: <span id='timeRemaining'>30</span> seconds</h1>").insertAfter($(".main-header"));
 	$("<h1 class='question'></h1>").insertAfter($(".timeRemaining"));
 	$("<div class='choices'></div>").insertAfter($(".question"));
 
-	setTimer();
+	thirtySecTimer();
 	nextQuestion();
 
 }
