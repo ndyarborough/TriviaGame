@@ -1,0 +1,45 @@
+body {
+	background-image: url(../images/bg-collection.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	color: #61FFA1;
+}
+
+.main-container {
+	margin: 5% auto;
+	width: 70vw;
+	height: 80vh;
+	background-color: #1A452B;
+	text-align: center;
+}
+
+.start {
+	background-color: #000;
+	font-size: 2em;
+	color: #61FFA1;
+	padding: 3vh 8vw;
+	margin: 20vh auto;
+	width: 5vw;
+	border: #61FFA1 solid 2px;
+	border-radius: 10px; 
+}
+
+.main-header, .timeRemaining {
+	padding: 2% 0;
+}
+
+.main-header {
+  	font-size: 6vmax;
+  	margin: 0 auto;
+  	border: 1px solid #61FFA1;
+  	border-top: none;
+  	border-bottom-right-radius: 10px;
+  	border-bottom-left-radius: 10px;
+  	background-color: #000;
+  	padding: 3vh 1vw;
+  	width: 80%
+}
+
+.timeRemaining {
+	font-size: 3vmax;
+}
