@@ -49,7 +49,6 @@ function thirtySecTimer() {
 			console.log(timeRemaining);
 		}
 		else {
-			// alert("Time's Up!");
 			unanswered++;
 			clearInterval(intervalID);
 			thirtySecTimer();
@@ -100,13 +99,6 @@ function calculateResults(){
 	$(".live-box").append($("<h3 class='incorrect'>Incorrect: <span id='incorrect'>0</span></h3>"));
 	$(".live-box").append($("<h3 class='unanswered'>Unanswered: <span id='unanswered'>0</span></h3>"));
 	$(".live-box").append($("<button id='playAgain'>Play again?</button>"));
-
-
-	// $("<h1 class='finished'>All done, here's how you did!</h1>").insertAfter($(".main-header"));
-	// $("<h3 class='correct'>Correct: <span id='correct'>0</span></h3>").insertAfter($(".finished"));
-	// $("<h3 class='incorrect'>Incorrect: <span id='incorrect'>0</span></h3><br>").insertAfter($(".correct"));
-	// $("<h3 class='unanswered'>Unanswered: <span id='unanswered'>0</span></h3>").insertAfter($(".incorrect"));
-	// $("<button id='playAgain'>Play again?</button>").insertAfter($(".unanswered"));
 
 	$("#correct").text(correct);
 	$("#incorrect").text(incorrect);
