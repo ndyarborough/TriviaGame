@@ -43,3 +43,35 @@ body {
 .timeRemaining {
 	font-size: 3vmax;
 }
+
+.choices {
+	margin: 0 auto;
+}
+
+.answerChoice {
+	width: 60%;
+	border-radius: 10px;
+	padding: 2vh 0;
+	margin: 0 auto;
+	font-size: 1.4em;
+}
+
+.answerChoice:hover {
+	background-color: #aaa;
+	color: #1A452B;
+	/*opacity: 20%;*/
+}
+
+.finished {
+	margin: 2vh auto;
+	font-size: 3em;
+}
+
+.correct, .incorrect, .unanswered {
+	margin: 2vh auto;
+	font-size: 2em;
+}
+
+#playAgain {
+	margin-bottom: 2vh;
+}
