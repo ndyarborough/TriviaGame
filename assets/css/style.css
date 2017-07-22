@@ -24,10 +24,6 @@ body {
 	border-radius: 10px; 
 }
 
-.main-header, .timeRemaining {
-	padding: 2% 0;
-}
-
 .main-header {
   	font-size: 6vmax;
   	margin: 0 auto;
@@ -37,11 +33,13 @@ body {
   	border-bottom-left-radius: 10px;
   	background-color: #000;
   	padding: 3vh 1vw;
-  	width: 80%
+  	width: 80%;
+  	padding: 2% 0;
 }
 
 .timeRemaining {
 	font-size: 3vmax;
+	padding: 2% 0;
 }
 
 .choices {
@@ -74,4 +72,25 @@ body {
 
 #playAgain {
 	margin-bottom: 2vh;
+}
+
+@media screen and (max-width: 1296px) {
+	.main-header {
+  	font-size: 2em;
+  	margin: 0 auto;
+  	border: 1px solid #61FFA1;
+  	border-top: none;
+  	border-bottom-right-radius: 10px;
+  	border-bottom-left-radius: 10px;
+  	background-color: #000;
+  	padding: 3vh 1vw;
+  	width: 80%;
+  	padding: 2% 0;
+}
+
+	.timeRemaining {
+		font-size: 1.2em;
+		/*margin-top: 0;*/
+	}
+
 }

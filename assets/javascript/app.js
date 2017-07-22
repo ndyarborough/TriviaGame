@@ -55,7 +55,8 @@ function thirtySecTimer() {
 }
 
 function nextQuestion() {
-
+	$(".gifHead").remove();
+	$(".giffy").remove();
 	clearInterval(intervalID);
 
 	thirtySecTimer();
@@ -77,16 +78,34 @@ function nextQuestion() {
 	questionCounter++;
 }
 
+function transition() {
+	setTimeout(nextQuestion, 4000);
+	if(userGuess === answers[questionCounter - 1]){
+	$(".live-box").append($("<h1 class='gifHead'>Correct!</h1>"));
+	} else {
+		$(".live-box").append($("<h1 class='gifHead'>Wrong Answer! It was " + answers[questionCounter - 1] + "</h1>"));
+	}
+	$(".live-box").append($("<img class='giffy' src='assets/images/" + (questionCounter -1) + ".gif'>"));	
+	$(".timeRemaining").empty();
+	$(".question").empty();
+	$(".choices").empty();
+
+}
+
+
 function gradeQuestion() {
 
 	userGuess = $(this).text();
 	
 	if(userGuess === answers[questionCounter - 1]){
 		correct++;
-		nextQuestion();
+		transition();
+
+		// nextQuestion();
+
 	} else {
 		incorrect++;
-		nextQuestion();
+		transition();
 	}
 }
 
