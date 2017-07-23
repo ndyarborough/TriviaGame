@@ -190,8 +190,8 @@ function hideAnswerKey(){
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
-$(document.body).on('click touch', '.start' , start);
-$(document.body).on('click touch', '.answerChoice' , gradeQuestion);
-$(document.body).on('click touch', '#playAgain' , reset);
-$(document.body).on('click touch', '.answerKey', showAnswerKey);
-$(document.body).on('click touch', '.hideAnswerKey', hideAnswerKey);
+$(document.body).on('click touchstart', '.start' , start);
+$(document.body).on('click touchstart', '.answerChoice' , gradeQuestion);
+$(document.body).on('click touchstart', '#playAgain' , reset);
+$(document.body).on('click touchstart', '.answerKey', showAnswerKey);
+$(document.body).on('click touchstart', '.hideAnswerKey', hideAnswerKey);
