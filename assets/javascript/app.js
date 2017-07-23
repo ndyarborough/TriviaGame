@@ -44,7 +44,7 @@ var unanswered = 0;
 var arrayLength = questions.length;
 var intervalID;
 
-
+$("<div class='start'>Start</div>").insertAfter($(".main-header"));
 
 function start() {
 	$(".start").remove()
@@ -54,9 +54,9 @@ function start() {
 	nextQuestion();
 }
 
-function thirtySecTimer() {
+function timer() {
 
-		timeRemaining = 30;
+		timeRemaining = 15;
     $(".live-box").prepend($("<h1 class='timeRemaining'>Time Remaining: <span id='timeRemaining'>30</span> seconds</h1>"));
 		$("#timeRemaining").text(timeRemaining);
 		intervalID = setInterval(function(){ 
@@ -80,12 +80,13 @@ function nextQuestion() {
   $(".timeRemaining").remove();
 	clearInterval(intervalID);
 
-	thirtySecTimer();
+	
 
 	 // If all questions have been answered
 	if(questionCounter === arrayLength) {
-		$(".live-box").empty();
 		calculateResults();
+	} else {
+		timer();
 	}
 	
 	$(".choices").empty();
@@ -100,7 +101,9 @@ function nextQuestion() {
 }
 
 function transition() {
+	
 	setTimeout(nextQuestion, 4000);
+	
 	if(userGuess === answers[questionCounter - 1]){
 	$(".live-box").append($("<h1 class='gifHead'>Correct!</h1>"));
 	$(".live-box").append($("<img height='300px' class='giffy' src='assets/images/" + (questionCounter -1) + ".gif'>"));
@@ -123,9 +126,6 @@ function gradeQuestion() {
 	if(userGuess === answers[questionCounter - 1]){
 		correct++;
 		transition();
-
-		// nextQuestion();
-
 	} else {
 		incorrect++;
 		transition();
@@ -134,32 +134,27 @@ function gradeQuestion() {
 
 function calculateResults(){
 	
-	clearInterval(intervalID);
-
 	$(".live-box").empty();
-
-	// $(".live-box").css({"background-color":"#465554", "width":"75%", "margin":"15% auto", "color":"#71DCD3", "border-radius":"10px"});
-
 	$(".live-box").append($("<h1 class='finished'>All done, here's how you did!</h1>"));
 	$(".live-box").append($("<h3 class='correct'>Correct: <span id='correct'>0</span></h3>"));
 	$(".live-box").append($("<h3 class='incorrect'>Incorrect: <span id='incorrect'>0</span></h3>"));
 	$(".live-box").append($("<h3 class='unanswered'>Unanswered: <span id='unanswered'>0</span></h3>"));
-	$(".live-box").append($("<button id='playAgain'>Play again?</button>"));
-
+	$(".live-box").append($("<button id='playAgain'>Play again?</button><br>"));
+	$(".live-box").append($("<button class='answerKey'>Show Answer Key with Gifs</button><br class='answerKey'>"));
+	
 	$("#correct").text(correct);
 	$("#incorrect").text(incorrect);
 	$("#unanswered").text(unanswered);
 }
 
 function reset() {
+	
 	questionCounter = 0;
 	correct = 0;
 	incorrect = 0;
 	unanswered = 0;
-console.log("reset");
 
-$(".live-box").empty();
-	
+	$(".live-box").empty();	
 	$(".live-box").append($("<h1 class='timeRemaining'>Time Remaining: <span id='timeRemaining'>30</span> seconds</h1>"));
 	$(".live-box").append($("<h1 class='question'></h1>"));
 	$(".live-box").append($("<div class='choices'></div>"));
@@ -167,19 +162,41 @@ $(".live-box").empty();
 	nextQuestion();
 }
 
+function showAnswerKey(){
 
+	$(".answerKey").remove();
+	
+	var gif0 = $("<h1 class='answerKey'>" + questions[0] + "<br class='answerKey'>" + answers[0] + "</h2><img class='answerKey' height='200' src='assets/images/0.gif'><br class='answerKey'>");
+	var gif1 = $("<h1 class='answerKey'>" + questions[1] + "<br class='answerKey'>" + answers[1] + "</h2><img class='answerKey' height='200' src='assets/images/1.gif'><br class='answerKey'>");
+	var gif2 = $("<h1 class='answerKey'>" + questions[2] + "<br class='answerKey'>" + answers[2] + "</h2><img class='answerKey' height='200' src='assets/images/2.gif'><br class='answerKey'>");
+	var gif3 = $("<h1 class='answerKey'>" + questions[3] + "<br class='answerKey'>" + answers[3] + "</h2><img class='answerKey' height='200' src='assets/images/3.gif'><br class='answerKey'>");
+	var gif4 = $("<h1 class='answerKey'>" + questions[4] + "<br class='answerKey'>" + answers[4] + "</h2><img class='answerKey' height='200' src='assets/images/4.gif'><br class='answerKey'>");
+	var gif5 = $("<h1 class='answerKey'>" + questions[5] + "<br class='answerKey'>" + answers[5] + "</h2><img class='answerKey' height='200' src='assets/images/5.gif'><br class='answerKey'>");
+	var gif6 = $("<h1 class='answerKey'>" + questions[6] + "<br class='answerKey'>" + answers[6] + "</h2><img class='answerKey' height='200' src='assets/images/6.gif'><br class='answerKey'>");
+	var gif7 = $("<h1 class='answerKey'>" + questions[7] + "<br class='answerKey'>" + answers[7] + "</h2><img class='answerKey' height='200' src='assets/images/7.gif'><br class='answerKey'>");
+	var gif8 = $("<h1 class='answerKey'>" + questions[8] + "<br class='answerKey'>" + answers[8] + "</h2><img class='answerKey' height='200' src='assets/images/8.gif'><br class='answerKey'>");
+	var gif9 = $("<h1 class='answerKey'>" + questions[9] + "<br class='answerKey'>" + answers[9] + "</h2><img class='answerKey' height='200' src='assets/images/9.gif'><br class='answerKey'>");
+	
+	$(".live-box").append($("<button class='hideAnswerKey'>Hide Answer Key</button><br class='hideAnswerKey'>"));
+	$(".live-box").append( $(gif0), $(gif1), $(gif2), $(gif3), $(gif4), $(gif5), $(gif6));
+	$(".live-box").append( $(gif7), $(gif8), $(gif9));
+	$(".live-box").append($("<button class='answerKey'>Play again?</button><br class='answerKey'>"));
+	$(".live-box").append($("<button class='hideAnswerKey'>Hide Answer Key</button><br class='hideAnswerKey'>"));
+}
 
-
-
-
+function hideAnswerKey(){
+	$(".hideAnswerKey").remove();
+	$(".answerKey").remove();
+	$(".live-box").append($("<button class='answerKey'>Show Answer Key with Gifs</button><br class='answerKey'>"));
+}
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
-$("<div class='start'>Start</div>").insertAfter($(".main-header"));
 $(document.body).on('click', '.start' , start);
 $(document.body).on('click', '.answerChoice' , gradeQuestion);
-
 $(document.body).on('click', '#playAgain' , reset);
+$(document.body).on('click', '.answerKey', showAnswerKey);
+$(document.body).on('click', '.hideAnswerKey', hideAnswerKey);
 
 
 
