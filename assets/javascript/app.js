@@ -22,7 +22,6 @@ choices[7] = ["Toyota Camry", "Ford Fusion", "Honda Accord", "Mercedes Benz E350
 choices[8] = ["$10.9 Million USD", "$4.5 million USD", "25.6 Million USD", "17.3 Million USD"];
 choices[9] = ["162 MPH", "197 MPH", "242 MPH", "259 MPH"];
 
-
 var answers = [];
 answers[0] = "Bavarian Motor Works";
 answers[1] = "2.3 seconds"; 
@@ -34,7 +33,6 @@ answers[6] = "3";
 answers[7] = "Honda Accord"; 
 answers[8] = "$10.9 Million USD"; 
 answers[9] = "242 MPH"; 
-
 
 var timeRemaining;
 var questionCounter = 0;
@@ -68,19 +66,21 @@ function timer() {
 		else {
 			unanswered++;
 			clearInterval(intervalID);
-			nextQuestion();
+			setTimeout(nextQuestion, 4000);
+			$(".timeRemaining").empty();
+			$(".question").empty();
+			$(".choices").empty();
+			$(".live-box").append($("<h1 class='gifHead'>Time's Up! It was " + answers[questionCounter - 1] + "</h1>"));
+			$(".live-box").append($("<img height='300px' class='giffy' src='assets/images/times-up.gif'>"));
 		}
 		}, 1000);
-
 }
 
 function nextQuestion() {
 	$(".gifHead").remove();
 	$(".giffy").remove();
-  $(".timeRemaining").remove();
+    $(".timeRemaining").remove();
 	clearInterval(intervalID);
-
-	
 
 	 // If all questions have been answered
 	if(questionCounter === arrayLength) {
@@ -103,21 +103,19 @@ function nextQuestion() {
 function transition() {
 	
 	setTimeout(nextQuestion, 4000);
-	
-	if(userGuess === answers[questionCounter - 1]){
-	$(".live-box").append($("<h1 class='gifHead'>Correct!</h1>"));
-	$(".live-box").append($("<img height='300px' class='giffy' src='assets/images/" + (questionCounter -1) + ".gif'>"));
-	} else {
-		$(".live-box").append($("<h1 class='gifHead'>Wrong Answer! It was " + answers[questionCounter - 1] + "</h1>"));
-		$(".live-box").append($("<img height='300px' class='giffy' src='assets/images/wrong.gif'>"));
-	}
-		
 	$(".timeRemaining").empty();
 	$(".question").empty();
 	$(".choices").empty();
 
+	if(userGuess === answers[questionCounter - 1]){
+	$(".live-box").append($("<h1 class='gifHead'>Correct!</h1>"));
+	$(".live-box").append($("<img height='300px' class='giffy' src='assets/images/" + (questionCounter -1) + ".gif'>"));
+	}
+	else {
+		$(".live-box").append($("<h1 class='gifHead'>Wrong Answer! It was " + answers[questionCounter - 1] + "</h1>"));
+		$(".live-box").append($("<img height='300px' class='giffy' src='assets/images/wrong.gif'>"));
+	}
 }
-
 
 function gradeQuestion() {
 
@@ -192,12 +190,8 @@ function hideAnswerKey(){
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
 ///////////////////////////////////////////////////
-$(document.body).on('click', '.start' , start);
-$(document.body).on('click', '.answerChoice' , gradeQuestion);
-$(document.body).on('click', '#playAgain' , reset);
-$(document.body).on('click', '.answerKey', showAnswerKey);
-$(document.body).on('click', '.hideAnswerKey', hideAnswerKey);
-
-
-
-
+$(document.body).on('click touch', '.start' , start);
+$(document.body).on('click touch', '.answerChoice' , gradeQuestion);
+$(document.body).on('click touch', '#playAgain' , reset);
+$(document.body).on('click touch', '.answerKey', showAnswerKey);
+$(document.body).on('click touch', '.hideAnswerKey', hideAnswerKey);
